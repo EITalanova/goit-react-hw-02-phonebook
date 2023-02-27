@@ -31,13 +31,15 @@ class App extends Component {
           //  { prevState.contacts, newContact}
           // prevState.contacts = [newContact, ...prevState.contacts]
           // console.log(prevState.contacts);
-          return alert('Contact isalready in contacts!');
+          return alert('Contact is already in contacts!');
         } else {
           return null;
           //  this.state.contacts = [newContact, ...prevState.contacts]
         }
       }),
+      // eslint-disable-next-line 
       contacts: [newContact, ...prevState.contacts],
+
 
       // contacts: [newContact, ...prevState.contacts],
     }));
