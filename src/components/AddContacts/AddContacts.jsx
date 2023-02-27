@@ -1,13 +1,9 @@
-import css from './AddContacts';
+import css from './AddContacts.module.css';
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
-import { render } from '@testing-library/react';
 
 class AddContacts extends Component {
   state = {
     contacts: [],
-    // filter: '',
     name: '',
   };
 
@@ -30,10 +26,11 @@ class AddContacts extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form className={css.form} onSubmit={this.handleSubmit}>
+        <label className={css.label}>
           Name
           <input
+            className={css.input}
             type="text"
             name="name"
             value={this.state.name}
@@ -43,9 +40,10 @@ class AddContacts extends Component {
             required
           />
         </label>
-        <label>
+        <label className={css.label}>
           Number
           <input
+            className={css.input}
             type="tel"
             name="number"
             value={this.state.number}
@@ -55,7 +53,9 @@ class AddContacts extends Component {
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button className={css.btn} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

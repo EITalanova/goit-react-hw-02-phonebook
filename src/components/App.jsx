@@ -25,9 +25,22 @@ class App extends Component {
     };
 
     this.setState(prevState => ({
-      contacts: [newContact, ...prevState.contacts]
+      contacts: prevState.contacts.find(contact => {
+        if (contact.name === newContact.name) {
+          // newContact
+          //  { prevState.contacts, newContact}
+          // prevState.contacts = [newContact, ...prevState.contacts]
+          // console.log(prevState.contacts);
+          return alert('Contact isalready in contacts!');
+        } else {
+          //  this.state.contacts = [newContact, ...prevState.contacts]
+        }
+      }),
+      contacts: [newContact, ...prevState.contacts],
+
+      // contacts: [newContact, ...prevState.contacts],
     }));
-    console.log(this.state.contacts);
+    // console.log(this.state.contacts);
   };
 
   changeFilter = e => {
@@ -42,13 +55,14 @@ class App extends Component {
     );
   };
 
-  // deletContact = (e) => {
-  //   this.setState({e.currentTarget.value})
-  // }
-    
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contactId !== contact.id),
+    }));
+  };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
 
     return (
@@ -56,16 +70,22 @@ class App extends Component {
         style={{
           height: '100vh',
           display: 'flex',
-          justifyContent: 'center',
+          // justifyContent: 'center',
+          flexDirection: 'column',
           alignItems: 'center',
           fontSize: 10,
           color: '#010101',
         }}
       >
+        <h1>Phonebook</h1>
         <AddContacts onSubmit={this.formSubmitHandler} />
+        <h2>Contacts</h2>
         <Filter filter={filter} onChange={this.changeFilter} />
         <ContactList>
-          <ContactEll contacts={visibleContacts}/>
+          <ContactEll
+            contacts={visibleContacts}
+            deleteContact={this.deleteContact}
+          />
         </ContactList>
       </div>
     );
