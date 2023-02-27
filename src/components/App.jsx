@@ -33,6 +33,7 @@ class App extends Component {
           // console.log(prevState.contacts);
           return alert('Contact isalready in contacts!');
         } else {
+          return null;
           //  this.state.contacts = [newContact, ...prevState.contacts]
         }
       }),
